@@ -23,11 +23,15 @@ public class Challenges {
 //        System.out.println("hasSharedDigit(15, 55) = " + hasSharedDigit(15, 55));
 //        System.out.println("hasSharedDigit(12, 43) = " + hasSharedDigit(12, 43));
 
-        System.out.println("hasSameLastDigit(41, 22, 71) = " + hasSameLastDigit(41, 22, 71));
-        System.out.println("hasSameLastDigit(23, 32, 42) = " + hasSameLastDigit(23, 32, 42));
-        System.out.println("hasSameLastDigit(9, 99, 999) = " + hasSameLastDigit(9, 99, 999));
+//        System.out.println("hasSameLastDigit(41, 22, 71) = " + hasSameLastDigit(41, 22, 71));
+//        System.out.println("hasSameLastDigit(23, 32, 42) = " + hasSameLastDigit(23, 32, 42));
+//        System.out.println("hasSameLastDigit(9, 99, 999) = " + hasSameLastDigit(9, 99, 999));
 
 
+        System.out.println("getGreatestCommonDivisor(25, 15) = " + getGreatestCommonDivisor(25, 15));
+        System.out.println("getGreatestCommonDivisor(12, 30) = " + getGreatestCommonDivisor(12, 30));
+        System.out.println("getGreatestCommonDivisor(9, 18) = " + getGreatestCommonDivisor(9, 18));
+        System.out.println("getGreatestCommonDivisor(81, 153) = " + getGreatestCommonDivisor(81, 153));
     }
 
     public static boolean isPalindrome(int number){
@@ -125,5 +129,31 @@ public class Challenges {
                 System.out.println(i);
             }
         }
+    }
+
+    public static int getGreatestCommonDivisor(int first, int second){
+        if(first<10 || second<10) return -1;
+
+        int result = 1;
+        int lower;
+        int higher;
+
+        if(first<=second){
+            lower=first;
+            higher=second;
+        }else {
+            lower=second;
+            higher=first;
+        }
+
+        for (int i = 1; i <=lower ; i++) {
+            if(lower%i==0){
+                if(higher%i==0){
+                    result=i;
+                }
+            }
+        }
+
+        return result;
     }
 }
