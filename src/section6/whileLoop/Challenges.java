@@ -33,89 +33,108 @@ public class Challenges {
 //        System.out.println("getGreatestCommonDivisor(9, 18) = " + getGreatestCommonDivisor(9, 18));
 //        System.out.println("getGreatestCommonDivisor(81, 153) = " + getGreatestCommonDivisor(81, 153));
 
-        System.out.println("isPerfectNumber(6) = " + isPerfectNumber(6));
-        System.out.println("isPerfectNumber(28) = " + isPerfectNumber(28));
-        System.out.println("isPerfectNumber(5) = " + isPerfectNumber(5));
-        System.out.println("isPerfectNumber(-1) = " + isPerfectNumber(-1));
+//        System.out.println("isPerfectNumber(6) = " + isPerfectNumber(6));
+//        System.out.println("isPerfectNumber(28) = " + isPerfectNumber(28));
+//        System.out.println("isPerfectNumber(5) = " + isPerfectNumber(5));
+//        System.out.println("isPerfectNumber(-1) = " + isPerfectNumber(-1));
+
+        System.out.println("getDigitCount(0) = " + getDigitCount(0));
+        System.out.println("getDigitCount(123) = " + getDigitCount(123));
+        System.out.println("getDigitCount(-12) = " + getDigitCount(-12));
+        System.out.println("getDigitCount(5200) = " + getDigitCount(5200));
+
+        System.out.println("reverse(-121) = " + reverse(-121));
+        System.out.println("reverse(1212) = " + reverse(1212));
+        System.out.println("reverse(1234) = " + reverse(1234));
+        System.out.println("reverse(100) = " + reverse(100));
+
+        numberToWords(123);
+        System.out.println("-----");
+        numberToWords(1010);
+        System.out.println("-----");
+        numberToWords(1000);
+        System.out.println("-----");
+        numberToWords(-12);
 
     }
 
-    public static boolean isPalindrome(int number){
+
+    public static boolean isPalindrome(int number) {
 
         int reverse = 0;
-        int savedNumber=number;
+        int savedNumber = number;
 
-        while(number > 9 || number<-9){
-            reverse+=(number%10);
-            reverse=reverse*10;
-            number=number/10;
+        while (number > 9 || number < -9) {
+            reverse += (number % 10);
+            reverse = reverse * 10;
+            number = number / 10;
         }
 
-        reverse+=number;
+        reverse += number;
 
-        return reverse==savedNumber;
+        return reverse == savedNumber;
 
     }
 
-    public static int sumFirstAndLastDigit(int number){
+    public static int sumFirstAndLastDigit(int number) {
 
-        if(number<0){
+        if (number < 0) {
             return -1;
         }
 
-        int sum = number%10;
+        int sum = number % 10;
 
-        while(number>9){
-            number/=10;
+        while (number > 9) {
+            number /= 10;
         }
 
-        return sum+number;
+        return sum + number;
     }
 
-    public static int getEvenDigitSum(int number){
-        if(number<0){
+    public static int getEvenDigitSum(int number) {
+        if (number < 0) {
             return -1;
         }
 
         int sum = 0;
 
-        while(number>0){
-            if((number%10)%2==0){
-                sum+=number%10;
+        while (number > 0) {
+            if ((number % 10) % 2 == 0) {
+                sum += number % 10;
             }
-            number/=10;
+            number /= 10;
         }
 
         return sum;
 
     }
 
-    public static boolean hasSharedDigit(int firstNumber, int secondNumber){
+    public static boolean hasSharedDigit(int firstNumber, int secondNumber) {
 
-        if(firstNumber<10 || firstNumber>99 ||secondNumber<10 || secondNumber>99) return false;
+        if (firstNumber < 10 || firstNumber > 99 || secondNumber < 10 || secondNumber > 99) return false;
 
-        int secondNumberLoop=secondNumber;
+        int secondNumberLoop = secondNumber;
 
-        while(firstNumber>=1){
-            while (secondNumberLoop>=1){
-                if (firstNumber%10==secondNumberLoop%10){
+        while (firstNumber >= 1) {
+            while (secondNumberLoop >= 1) {
+                if (firstNumber % 10 == secondNumberLoop % 10) {
                     return true;
                 }
-                secondNumberLoop=secondNumberLoop/10;
+                secondNumberLoop = secondNumberLoop / 10;
             }
-            secondNumberLoop=secondNumber;
-            firstNumber=firstNumber/10;
+            secondNumberLoop = secondNumber;
+            firstNumber = firstNumber / 10;
         }
 
         return false;
     }
 
-    public static boolean isValid(int number){
-        return number>10 && number<=1000;
+    public static boolean isValid(int number) {
+        return number > 10 && number <= 1000;
     }
 
-    public static boolean hasSameLastDigit(int a, int b, int c){
-        if(isValid(a) && isValid(b) && isValid(c)){
+    public static boolean hasSameLastDigit(int a, int b, int c) {
+        if (isValid(a) && isValid(b) && isValid(c)) {
             a %= 10;
             b %= 10;
             c %= 10;
@@ -124,38 +143,38 @@ public class Challenges {
         return false;
     }
 
-    public static void printFactors(int number){
-        if(number<1){
+    public static void printFactors(int number) {
+        if (number < 1) {
             System.out.println("Invalid Value");
             return;
         }
 
         for (int i = 1; i <= number; i++) {
-            if(number%i==0){
+            if (number % i == 0) {
                 System.out.println(i);
             }
         }
     }
 
-    public static int getGreatestCommonDivisor(int first, int second){
-        if(first<10 || second<10) return -1;
+    public static int getGreatestCommonDivisor(int first, int second) {
+        if (first < 10 || second < 10) return -1;
 
         int result = 1;
         int lower;
         int higher;
 
-        if(first<=second){
-            lower=first;
-            higher=second;
-        }else {
-            lower=second;
-            higher=first;
+        if (first <= second) {
+            lower = first;
+            higher = second;
+        } else {
+            lower = second;
+            higher = first;
         }
 
-        for (int i = 1; i <=lower ; i++) {
-            if(lower%i==0){
-                if(higher%i==0){
-                    result=i;
+        for (int i = 1; i <= lower; i++) {
+            if (lower % i == 0) {
+                if (higher % i == 0) {
+                    result = i;
                 }
             }
         }
@@ -163,17 +182,87 @@ public class Challenges {
         return result;
     }
 
-    public static boolean isPerfectNumber(int number){
+    public static boolean isPerfectNumber(int number) {
 //        if(number<1) return false;
 
-        int sumOfDividers=1;
+        int sumOfDividers = 1;
 
-        for (int i = 2; i < number ; i++) {
-            if(number%i==0){
-                sumOfDividers+=i;
+        for (int i = 2; i < number; i++) {
+            if (number % i == 0) {
+                sumOfDividers += i;
             }
         }
 
-        return sumOfDividers==number && number>1;
+        return sumOfDividers == number && number > 1;
     }
+
+    public static void numberToWords(int number) {
+
+        if (number < 0) System.out.println("Invalid Value");
+
+        int reverseNumber = reverse(number);
+        for (int i = 0; i < getDigitCount(number); i++) {
+
+            switch (reverseNumber % 10) {
+                case 0:
+                    System.out.print("Zero ");
+                    break;
+                case 1:
+                    System.out.print("One ");
+                    break;
+                case 2:
+                    System.out.print("Two ");
+                    break;
+                case 3:
+                    System.out.print("Three ");
+                    break;
+                case 4:
+                    System.out.print("Four ");
+                    break;
+                case 5:
+                    System.out.print("Five ");
+                    break;
+                case 6:
+                    System.out.print("Six ");
+                    break;
+                case 7:
+                    System.out.print("Seven ");
+                    break;
+                case 8:
+                    System.out.print("Eight ");
+                    break;
+                case 9:
+                    System.out.print("Nine ");
+                    break;
+                default:
+                    break;
+            }
+            reverseNumber /= 10;
+        }
+
+        System.out.println();
+
+    }
+
+    public static int reverse(int number) {
+        int reverseNumber = 0;
+
+        while (number != 0) {
+            reverseNumber = (reverseNumber * 10) + (number % 10);
+            number /= 10;
+        }
+        return reverseNumber;
+
+    }
+
+    public static int getDigitCount(int number) {
+        if (number < 0) return -1;
+        int result = 1;
+        while (number / 10 > 0) {
+            result++;
+            number = number / 10;
+        }
+        return result;
+    }
+
 }
