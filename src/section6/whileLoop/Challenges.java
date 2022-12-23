@@ -8,11 +8,15 @@ public class Challenges {
 //        System.out.println("isPalindrome(707) = " + isPalindrome(707));
 //        System.out.println("isPalindrome(11212) = " + isPalindrome(11212));
 
-        System.out.println("sumFirstAndLastDigit(252) = " + sumFirstAndLastDigit(252));
-        System.out.println("sumFirstAndLastDigit(257) = " + sumFirstAndLastDigit(257));
-        System.out.println("sumFirstAndLastDigit(0) = " + sumFirstAndLastDigit(0));
-        System.out.println("sumFirstAndLastDigit(5) = " + sumFirstAndLastDigit(5));
-        System.out.println("sumFirstAndLastDigit(-10) = " + sumFirstAndLastDigit(-10));
+//        System.out.println("sumFirstAndLastDigit(252) = " + sumFirstAndLastDigit(252));
+//        System.out.println("sumFirstAndLastDigit(257) = " + sumFirstAndLastDigit(257));
+//        System.out.println("sumFirstAndLastDigit(0) = " + sumFirstAndLastDigit(0));
+//        System.out.println("sumFirstAndLastDigit(5) = " + sumFirstAndLastDigit(5));
+//        System.out.println("sumFirstAndLastDigit(-10) = " + sumFirstAndLastDigit(-10));
+
+        System.out.println("getEvenDigitSum(123456789) = " + getEvenDigitSum(123456789));
+        System.out.println("getEvenDigitSum(252) = " + getEvenDigitSum(252));
+        System.out.println("getEvenDigitSum(-22) = " + getEvenDigitSum(-22));
     }
 
     public static boolean isPalindrome(int number){
@@ -45,5 +49,23 @@ public class Challenges {
         }
 
         return sum+number;
+    }
+
+    public static int getEvenDigitSum(int number){
+        if(number<0){
+            return -1;
+        }
+
+        int sum = 0;
+
+        while(number>0){
+            if((number%10)%2==0){
+                sum+=number%10;
+            }
+            number/=10;
+        }
+
+        return sum;
+
     }
 }
