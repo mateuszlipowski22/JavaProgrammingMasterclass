@@ -14,9 +14,15 @@ public class Challenges {
 //        System.out.println("sumFirstAndLastDigit(5) = " + sumFirstAndLastDigit(5));
 //        System.out.println("sumFirstAndLastDigit(-10) = " + sumFirstAndLastDigit(-10));
 
-        System.out.println("getEvenDigitSum(123456789) = " + getEvenDigitSum(123456789));
-        System.out.println("getEvenDigitSum(252) = " + getEvenDigitSum(252));
-        System.out.println("getEvenDigitSum(-22) = " + getEvenDigitSum(-22));
+//        System.out.println("getEvenDigitSum(123456789) = " + getEvenDigitSum(123456789));
+//        System.out.println("getEvenDigitSum(252) = " + getEvenDigitSum(252));
+//        System.out.println("getEvenDigitSum(-22) = " + getEvenDigitSum(-22));
+
+        System.out.println("hasSharedDigit(12, 23) = " + hasSharedDigit(12, 23));
+        System.out.println("hasSharedDigit(9, 99) = " + hasSharedDigit(9, 99));
+        System.out.println("hasSharedDigit(15, 55) = " + hasSharedDigit(15, 55));
+        System.out.println("hasSharedDigit(12, 43) = " + hasSharedDigit(12, 43));
+
     }
 
     public static boolean isPalindrome(int number){
@@ -67,5 +73,25 @@ public class Challenges {
 
         return sum;
 
+    }
+
+    public static boolean hasSharedDigit(int firstNumber, int secondNumber){
+
+        if(firstNumber<10 || firstNumber>99 ||secondNumber<10 || secondNumber>99) return false;
+
+        int secondNumberLoop=secondNumber;
+
+        while(firstNumber>=1){
+            while (secondNumberLoop>=1){
+                if (firstNumber%10==secondNumberLoop%10){
+                    return true;
+                }
+                secondNumberLoop=secondNumberLoop/10;
+            }
+            secondNumberLoop=secondNumber;
+            firstNumber=firstNumber/10;
+        }
+
+        return false;
     }
 }
