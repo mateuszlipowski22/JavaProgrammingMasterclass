@@ -28,10 +28,16 @@ public class Challenges {
 //        System.out.println("hasSameLastDigit(9, 99, 999) = " + hasSameLastDigit(9, 99, 999));
 
 
-        System.out.println("getGreatestCommonDivisor(25, 15) = " + getGreatestCommonDivisor(25, 15));
-        System.out.println("getGreatestCommonDivisor(12, 30) = " + getGreatestCommonDivisor(12, 30));
-        System.out.println("getGreatestCommonDivisor(9, 18) = " + getGreatestCommonDivisor(9, 18));
-        System.out.println("getGreatestCommonDivisor(81, 153) = " + getGreatestCommonDivisor(81, 153));
+//        System.out.println("getGreatestCommonDivisor(25, 15) = " + getGreatestCommonDivisor(25, 15));
+//        System.out.println("getGreatestCommonDivisor(12, 30) = " + getGreatestCommonDivisor(12, 30));
+//        System.out.println("getGreatestCommonDivisor(9, 18) = " + getGreatestCommonDivisor(9, 18));
+//        System.out.println("getGreatestCommonDivisor(81, 153) = " + getGreatestCommonDivisor(81, 153));
+
+        System.out.println("isPerfectNumber(6) = " + isPerfectNumber(6));
+        System.out.println("isPerfectNumber(28) = " + isPerfectNumber(28));
+        System.out.println("isPerfectNumber(5) = " + isPerfectNumber(5));
+        System.out.println("isPerfectNumber(-1) = " + isPerfectNumber(-1));
+
     }
 
     public static boolean isPalindrome(int number){
@@ -155,5 +161,19 @@ public class Challenges {
         }
 
         return result;
+    }
+
+    public static boolean isPerfectNumber(int number){
+//        if(number<1) return false;
+
+        int sumOfDividers=1;
+
+        for (int i = 2; i < number ; i++) {
+            if(number%i==0){
+                sumOfDividers+=i;
+            }
+        }
+
+        return sumOfDividers==number && number>1;
     }
 }
