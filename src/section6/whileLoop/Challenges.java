@@ -18,10 +18,15 @@ public class Challenges {
 //        System.out.println("getEvenDigitSum(252) = " + getEvenDigitSum(252));
 //        System.out.println("getEvenDigitSum(-22) = " + getEvenDigitSum(-22));
 
-        System.out.println("hasSharedDigit(12, 23) = " + hasSharedDigit(12, 23));
-        System.out.println("hasSharedDigit(9, 99) = " + hasSharedDigit(9, 99));
-        System.out.println("hasSharedDigit(15, 55) = " + hasSharedDigit(15, 55));
-        System.out.println("hasSharedDigit(12, 43) = " + hasSharedDigit(12, 43));
+//        System.out.println("hasSharedDigit(12, 23) = " + hasSharedDigit(12, 23));
+//        System.out.println("hasSharedDigit(9, 99) = " + hasSharedDigit(9, 99));
+//        System.out.println("hasSharedDigit(15, 55) = " + hasSharedDigit(15, 55));
+//        System.out.println("hasSharedDigit(12, 43) = " + hasSharedDigit(12, 43));
+
+        System.out.println("hasSameLastDigit(41, 22, 71) = " + hasSameLastDigit(41, 22, 71));
+        System.out.println("hasSameLastDigit(23, 32, 42) = " + hasSameLastDigit(23, 32, 42));
+        System.out.println("hasSameLastDigit(9, 99, 999) = " + hasSameLastDigit(9, 99, 999));
+
 
     }
 
@@ -94,4 +99,20 @@ public class Challenges {
 
         return false;
     }
+
+    public static boolean isValid(int number){
+        return number>10 && number<=1000;
+    }
+
+    public static boolean hasSameLastDigit(int a, int b, int c){
+        if(isValid(a) && isValid(b) && isValid(c)){
+            a %= 10;
+            b %= 10;
+            c %= 10;
+            return (a == b) || (a == c) || (b == c);
+        }
+        return false;
+    }
+
+
 }
