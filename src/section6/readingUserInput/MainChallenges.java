@@ -10,11 +10,14 @@ public class MainChallenges {
 //        System.out.println("canPack(2, 2, 11) = " + canPack(2, 2, 11));
 //        System.out.println("canPack(-3, 2, 12) = " + canPack(-3, 2, 12));
 
-        System.out.println("getLargestPrime(21) = " + getLargestPrime(21));
-        System.out.println("getLargestPrime(217) = " + getLargestPrime(217));
-        System.out.println("getLargestPrime(0) = " + getLargestPrime(0));
-        System.out.println("getLargestPrime(45) = " + getLargestPrime(45));
-        System.out.println("getLargestPrime(-1) = " + getLargestPrime(-1));
+//        System.out.println("getLargestPrime(21) = " + getLargestPrime(21));
+//        System.out.println("getLargestPrime(217) = " + getLargestPrime(217));
+//        System.out.println("getLargestPrime(0) = " + getLargestPrime(0));
+//        System.out.println("getLargestPrime(45) = " + getLargestPrime(45));
+//        System.out.println("getLargestPrime(-1) = " + getLargestPrime(-1));
+
+        printSquareStar(5);
+        printSquareStar(8);
     }
 
 
@@ -40,20 +43,49 @@ public class MainChallenges {
 
     public static int getLargestPrime(int number) {
 
-        if (number <= 1) return -1;
-
-        int largestPrime = 1;
-
-        while (number != 1) {
-            for (int i = 2; i <= number; i++) {
-                if (number % i == 0) {
-                    number /= i;
-                    largestPrime = i;
-                    break;
-                }
+        if (number < 2) {
+            return -1;
+        }
+        for (int i = 2; i < number; i++) {
+            if ((number % i) == 0) {
+                number /= i;
+                i--;
             }
         }
+        return number;
 
-        return largestPrime;
+//            if (number <= 1) return -1;
+//
+//            int largestPrime = 1;
+//
+//            while (number != 1) {
+//                for (int i = 2; i <= number; i++) {
+//                    if (number % i == 0) {
+//                        number/= i;
+//                        largestPrime = i;
+//                        break;
+//                    }
+//                }
+//            }
+//
+//        return largestPrime;
+    }
+
+    public static void printSquareStar(int number){
+        if(number<5) {
+            System.out.println("Invalid Value");
+            return;
+        }
+
+        for (int i = 1; i <= number; i++) {
+            for (int j = 1; j <= number; j++) {
+                if(i==1 || i ==number || j==1 || j == number || i==j || j==number-i+1){
+                    System.out.print("*");
+                }else {
+                    System.out.print(" ");
+                }
+            }
+            System.out.println();
+        }
     }
 }
