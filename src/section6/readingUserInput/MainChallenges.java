@@ -1,5 +1,7 @@
 package section6.readingUserInput;
 
+import java.util.Scanner;
+
 public class MainChallenges {
 
     public static void main(String[] args) {
@@ -87,5 +89,27 @@ public class MainChallenges {
             }
             System.out.println();
         }
+    }
+
+    public static void inputThenPrintSumAndAverage() {
+        Scanner scanner = new Scanner(System.in);
+
+        double sum = 0;
+        double avg = 0;
+        double inputCount = 0;
+
+        while (true) {
+            try {
+                int next = Integer.parseInt(scanner.nextLine());
+                sum += next;
+                inputCount++;
+            } catch (NumberFormatException e) {
+                break;
+            }
+        }
+        avg = Math.round(sum / inputCount);
+
+        System.out.println("SUM = " +(int) sum + " AVG = " + (long) avg);
+
     }
 }
