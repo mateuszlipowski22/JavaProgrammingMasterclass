@@ -18,8 +18,20 @@ public class MainChallenges {
 //        System.out.println("getLargestPrime(45) = " + getLargestPrime(45));
 //        System.out.println("getLargestPrime(-1) = " + getLargestPrime(-1));
 
-        printSquareStar(5);
-        printSquareStar(8);
+//        printSquareStar(5);
+//        printSquareStar(8);
+
+        System.out.println("getBucketCount(-3.4, 2.1, 1.5, 2) = " + getBucketCount(-3.4, 2.1, 1.5, 2));
+        System.out.println("getBucketCount(3.4, 2.1, 1.5, 2) = " + getBucketCount(3.4, 2.1, 1.5, 2));
+        System.out.println("getBucketCount(2.75, 3.25, 2.5, 1) = " + getBucketCount(2.75, 3.25, 2.5, 1));
+
+        System.out.println("getBucketCount(-3.4, 2.1, 1.5) = " + getBucketCount(-3.4, 2.1, 1.5));
+        System.out.println("getBucketCount(3.4, 2.1, 1.5) = " + getBucketCount(3.4, 2.1, 1.5));
+        System.out.println("getBucketCount(7.25, 4.3, 2.35) = " + getBucketCount(7.25, 4.3, 2.35));
+
+        System.out.println("getBucketCount(3.4, 1.5) = " + getBucketCount(3.4, 1.5));
+        System.out.println("getBucketCount(6.26, 2.2) = " + getBucketCount(6.26, 2.2));
+        System.out.println("getBucketCount(3.26, 0.75) = " + getBucketCount(3.26, 0.75));
     }
 
 
@@ -98,18 +110,36 @@ public class MainChallenges {
         double avg = 0;
         double inputCount = 0;
 
-        while (true) {
-            try {
-                int next = Integer.parseInt(scanner.nextLine());
-                sum += next;
-                inputCount++;
-            } catch (NumberFormatException e) {
-                break;
-            }
+//        while (true) {
+//            try {
+//                int next = Integer.parseInt(scanner.nextLine());
+//                sum += next;
+//                inputCount++;
+//            } catch (NumberFormatException e) {
+//                break;
+//            }
+//        }
+
+        while(scanner.hasNextInt()){
+            sum += scanner.nextInt();
+            inputCount++;
         }
         avg = Math.round(sum / inputCount);
 
         System.out.println("SUM = " +(int) sum + " AVG = " + (long) avg);
 
+    }
+
+    public static int getBucketCount(double width, double height, double areaPerBucket, int extraBuckets){
+        if(width<=0 || height<=0 || areaPerBucket<=0 || extraBuckets<0) return -1;
+        return (int) Math.ceil((width*height-extraBuckets*areaPerBucket)/areaPerBucket);
+    }
+
+    public static int getBucketCount(double width, double height, double areaPerBucket){
+        return getBucketCount(width, height, areaPerBucket, 0);
+    }
+
+    public static int getBucketCount(double area, double areaPerBucket){
+        return getBucketCount(area, 1, areaPerBucket, 0);
     }
 }
