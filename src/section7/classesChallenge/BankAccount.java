@@ -9,6 +9,7 @@ public class BankAccount {
     private int phoneNumber;
 
     public BankAccount(){
+        this(1234,0,"Default name","email@wp.pl",123);
         System.out.println("Empty constructor called");
     }
 
@@ -19,6 +20,13 @@ public class BankAccount {
         this.customerName=customerName;
         this.email=email;
         this.phoneNumber=phoneNumber;
+    }
+
+    public BankAccount(String customerName, String email, int phoneNumber) {
+        this(9999,12, customerName, email,phoneNumber);
+//        this.customerName = customerName;
+//        this.email = email;
+//        this.phoneNumber = phoneNumber;
     }
 
     public void depositFound(double deposit){
