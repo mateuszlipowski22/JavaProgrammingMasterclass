@@ -1,18 +1,62 @@
 package section8.OOPMasterChallenge;
 
-public class Burger {
+public class Burger extends Item{
 
-    private Burger burger;
-    private Drink drink;
-    private SideItem sideItem;
+    private Item extra1;
+    private Item extra2;
+    private Item extra3;
 
-    public Burger() {
-        this(new Burger(), new Drink(), new SideItem());
+    public Burger(String name, double price) {
+        super("Burger", name, price);
     }
 
-    public Burger(Burger burger, Drink drink, SideItem sideItem) {
-        this.burger = burger;
-        this.drink = drink;
-        this.sideItem = sideItem;
+    @Override
+    public String getName() {
+        return super.getName() + " BURGER";
     }
+
+    @Override
+    public double getAdjustedPrice() {
+        return getPrice()+
+                ((extra1==null) ? 0 : extra1.getAdjustedPrice()) +
+                ((extra2==null) ? 0 : extra2.getAdjustedPrice()) +
+                ((extra3==null) ? 0 : extra3.getAdjustedPrice());
+    }
+
+    public double getExtraPrice(String toppingName){
+        return switch (toppingName){
+            case "AVOCADO", "CHEESE" -> 1.0;
+            case "HAM", "SALAMI", "BACON" -> 1.5;
+            default -> 0.0;
+        };
+    }
+
+    public void addToppings(String extra1, String extra2, String extra3){
+
+        this.extra1 = new Item("TOPPING", extra1, getExtraPrice(extra1));
+        this.extra2 = new Item("TOPPING", extra2, getExtraPrice(extra2));
+        this.extra3 = new Item("TOPPING", extra3, getExtraPrice(extra3));
+
+    }
+
+    public void printItemizedList(){
+        printItem("BASED BURGER", getPrice());
+        if(extra1!=null){
+            extra1.printItem();
+        }
+        if(extra2!=null){
+            extra2.printItem();
+        }
+        if(extra3!=null){
+            extra3.printItem();
+        }
+    }
+
+    @Override
+    public void printItem() {
+        printItemizedList();
+        System.out.println("-".repeat(30));
+        super.printItem();
+    }
+
 }
