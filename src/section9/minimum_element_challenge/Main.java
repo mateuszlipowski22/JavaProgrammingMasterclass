@@ -18,15 +18,23 @@ public class Main {
         String[] stringArray = scanner.nextLine().split(",");
         int[] result=new int[stringArray.length];
         for (int i=0; i<result.length ; i++) {
-            result[i]=Integer.parseInt(stringArray[i]);
+            result[i]=Integer.parseInt(stringArray[i].trim());
         };
         return result;
     }
 
     public static int findMin(int[] array){
 
-        return Arrays.stream(array).min().getAsInt();
+//        return Arrays.stream(array).min().getAsInt();
 //        Arrays.sort(array);
 //        return array[0];
+
+        int min = Integer.MAX_VALUE;
+        for(int el : array){
+            if(el<min){
+                min=el;
+            }
+        }
+        return min;
     }
 }
