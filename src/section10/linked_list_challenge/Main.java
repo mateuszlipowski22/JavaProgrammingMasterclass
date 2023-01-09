@@ -21,43 +21,70 @@ public class Main {
         ListIterator<Town> iterator = list.listIterator();
 
         boolean flag = true;
+        boolean forward = true;
         printMenu();
-        while (flag){
-            switch (scanner.nextLine().toUpperCase()){
-                case "F","FORWARD"->{
-                    if(iterator.hasNext()){
-                        iterator.next();
+
+        if(!iterator.hasNext()){
+            System.out.println("Final : "+ iterator.previous());
+            forward=false;
+        }
+
+        while (flag) {
+            System.out.println("Enter value: ");
+            switch (scanner.nextLine().toUpperCase().substring(0, 1)) {
+                case "F" -> {
+                    if(!forward){
+                        forward=true;
+                        if(iterator.hasNext()){
+                            iterator.next();
+                        }
+                    }
+                    if (iterator.hasNext()) {
+                        System.out.println(iterator.next());
                     }
                 }
-                case "B","BACKWARD"->{
-                    if(iterator.hasPrevious()){
-                        iterator.previous();
+                case "B" -> {
+                    if(forward){
+                        forward=false;
+                        if(iterator.hasPrevious()){
+                            iterator.previous();
+                        }
+                    }
+
+                    if (iterator.hasPrevious()) {
+                        System.out.println(iterator.previous());
                     }
                 }
-                case "L","LIST PLACES"->{
+                case "L" -> {
                     System.out.println(list);
                 }
-                case "Q","QUIT"->{
-                    flag=false;
+
+                case "M" -> {
+                    printMenu();
+                }
+
+                case "Q" -> {
+                    flag = false;
+                    break;
                 }
             }
-            printMenu();
         }
 
     }
 
-    public static void printMenu(){
+    public static void printMenu() {
         System.out.print("""
-                    Available actions (select word or letter)
-                    (F)orward
-                    (B)ackward
-                    (L)ist Places
-                    (M)enu
-                    (Q)uit""");
+                Available actions (select word or letter)
+                (F)orward
+                (B)ackward
+                (L)ist Places
+                (M)enu
+                (Q)uit
+                """);
     }
 
-    public static LinkedList<Town> getList(){
-        LinkedList<Town> towns= new LinkedList<>();
+    public static LinkedList<Town> getList() {
+        LinkedList<Town> towns = new LinkedList<>();
         towns.add(new Town("Sydney", 0));
         towns.add(new Town("Adelaide", 1374));
         towns.add(new Town("Alice Springs", 2771));
@@ -69,22 +96,22 @@ public class Main {
         return towns;
     }
 
-    public static void addPlaces(LinkedList<Town> list, Town town){
-        if(list.contains(town)){
+    public static void addPlaces(LinkedList<Town> list, Town town) {
+        if (list.contains(town)) {
             System.out.println("Found duplicates: " + town);
             return;
         }
 
-        for (Town t : list){
-            if(t.name().equalsIgnoreCase(t.name())){
+        for (Town t : list) {
+            if (t.name().equalsIgnoreCase(t.name())) {
                 System.out.println("Found duplicates: " + town);
                 return;
             }
         }
 
         int matchedIndex = 0;
-        for(var listPlace : list){
-            if(town.distance()<listPlace.distance()){
+        for (var listPlace : list) {
+            if (town.distance() < listPlace.distance()) {
                 list.add(matchedIndex, town);
                 return;
             }
