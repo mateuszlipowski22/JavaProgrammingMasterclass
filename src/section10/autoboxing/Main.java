@@ -1,11 +1,15 @@
 package section10.autoboxing;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class Main {
 
     public static void main(String[] args) {
 
         Integer boxedInt = Integer.valueOf(15); // preffered by unnecesairy
-        Integer deprecatedBoxing = new Integer(15); // deprected sinced JDK 9
+        Integer deprecatedBoxing = 15; // deprected sinced JDK 9
         int unboxedInt = boxedInt.intValue(); // unnecessary
 
         // Automatic
@@ -18,6 +22,16 @@ public class Main {
         Double resultBoxed = getLiteralDoublePrimitive();
         double resultUnboxed = getDouble();
 
+        Integer[] wrapperArray = new Integer[5];
+        wrapperArray[0] = 50;
+        System.out.println(Arrays.toString(wrapperArray));
+        System.out.println(wrapperArray.getClass().getSimpleName());
+
+        Character[] characterArray = {'a','b','c','d','e'};
+        System.out.println(Arrays.toString(characterArray));
+
+        var ourList = List.of(1, 2, 3, 4, 5);
+        System.out.println(ourList);
     }
 
     private static Double getDouble(){
@@ -26,5 +40,20 @@ public class Main {
 
     private static double getLiteralDoublePrimitive(){
         return 100.0;
+    }
+
+    private static int returnAnInt(Integer i){
+        return i;
+    }
+
+    private static Integer returnAnInt(int i){
+        return i;
+    }
+    private static ArrayList<Integer> getList(Integer ...varargs){
+        ArrayList<Integer> aList = new ArrayList<>();
+        for (int i: varargs) {
+            aList.add(i);
+        }
+        return aList;
     }
 }
