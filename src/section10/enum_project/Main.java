@@ -1,5 +1,6 @@
 package section10.enum_project;
 
+import java.time.Duration;
 import java.util.Random;
 
 public class Main {
@@ -21,6 +22,9 @@ public class Main {
         for(Topping topping : Topping.values()){
             System.out.println(topping.name() + " : "+ topping.getPrice());
         }
+
+        Duration duration = Duration.parse("PT5M10S");
+        System.out.println(duration);
 
     }
 
