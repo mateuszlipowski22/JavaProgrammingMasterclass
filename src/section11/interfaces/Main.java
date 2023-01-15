@@ -10,6 +10,12 @@ public class Main {
         timsPhone.powerOn();
         timsPhone.callPhone(123);
         timsPhone.answer();
+
+        timsPhone = new MobilePhone(234);
+
+        timsPhone.powerOn();
+        timsPhone.callPhone(234);
+        timsPhone.answer();
     }
 
 }
