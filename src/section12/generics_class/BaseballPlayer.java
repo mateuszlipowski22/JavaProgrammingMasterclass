@@ -1,4 +1,4 @@
-package section12.generics_second;
+package section12.generics_class;
 
 public class BaseballPlayer extends Player{
 
