@@ -43,5 +43,21 @@ public class Main {
         System.out.println(adelaideCrows.compareTo(hawthorn));
         System.out.println(hawthorn.compareTo(adelaideCrows));
         System.out.println(melbourn.compareTo(fremantle));
+
+
+        League<Team<FootballPlayer>> footballLeague = new League<>("Premiere league");
+        footballLeague.addTeam(adelaideCrows);
+        footballLeague.addTeam(melbourn);
+        footballLeague.addTeam(hawthorn);
+        footballLeague.addTeam(fremantle);
+//        footballLeague.addTeam(brokenTeam);
+
+        footballLeague.displayLeagueTable();
+
+        hawthorn.matchResult(fremantle, 3, 1);
+        hawthorn.matchResult(fremantle, 3, 1);
+
+        footballLeague.displayLeagueTable();
+
     }
 }
