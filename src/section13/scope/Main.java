@@ -4,17 +4,22 @@ public class Main {
 
     public static void main(String[] args) {
 
-        String privateVar = "this is private to main()";
+        String varFour = "this is private to main()";
 
         ScopeCheck scopeInstance = new ScopeCheck();
-        System.out.println("scopeInstance privateVar is " + scopeInstance.getPrivateVar());
-
-        System.out.println(privateVar);
-
-        scopeInstance.timesTwo();
+        scopeInstance.useInner();
 
         ScopeCheck.InnerClass innerClass = scopeInstance.new InnerClass();
-        innerClass.timesTwo();
+//        System.out.println("varThree in not visable here " + innerClass.varThree);
+
+//        System.out.println("scopeInstance varOne is " + scopeInstance.getVarOne());
+//
+//        System.out.println(varFour);
+//
+//        scopeInstance.timesTwo();
+//
+//        ScopeCheck.InnerClass innerClass = scopeInstance.new InnerClass();
+//        innerClass.timesTwo();
     }
 
 }
