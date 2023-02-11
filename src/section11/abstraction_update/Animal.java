@@ -1,4 +1,4 @@
-package section11.abstractionUpdate;
+package section11.abstraction_update;
 
 abstract class Mammal extends Animal{
     public Mammal(String type, String size, double weight) {

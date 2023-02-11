@@ -1,4 +1,4 @@
-package section11.abstractionUpdate;
+package section11.abstraction_update;
 
 public class Horse extends Mammal{
 
