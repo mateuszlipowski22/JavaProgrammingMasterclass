@@ -9,6 +9,11 @@ enum FlightStages implements Trackable{
             System.out.println("Monitoring " + this);
         }
     }
+
+    public FlightStages getNextStage(){
+        FlightStages[] allStages = values();
+        return allStages[(ordinal()+1)%allStages.length];
+    }
 }
 
 record DragonFly(String name, String type) implements FlightEnabled{
@@ -62,6 +67,14 @@ interface FlightEnabled{
     void takeOff();
     void land();
     void fly();
+
+    default FlightStages transition(FlightStages stage){
+//        System.out.println("transition not implemented on "+getClass().getSimpleName());
+//        return null;
+        FlightStages nextStage=stage.getNextStage();
+        System.out.println("Transitioning from " + stage + " to " + nextStage);
+        return nextStage;
+    }
 }
 interface Trackable{
     void track();
