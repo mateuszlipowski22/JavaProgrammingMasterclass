@@ -9,7 +9,7 @@ import java.util.Set;
 
 public class Locations implements Map<Integer, Location> {
 
-    private static Map<Integer, Location> locations = new HashMap<Integer, Location>();
+    private static Map<Integer, Location> locations = new HashMap<>();
 
     public static void main(String[] args) throws IOException {
 
