@@ -36,7 +36,6 @@ public class Locations implements Map<Integer, Location> {
 
     static {
         try (ObjectInputStream locFile = new ObjectInputStream(new BufferedInputStream(new FileInputStream("locations.dat")))) {
-
             boolean eof = false;
             while (!eof) {
                 try {
@@ -53,6 +52,9 @@ public class Locations implements Map<Integer, Location> {
         }catch (ClassNotFoundException e) {
             System.out.println("ClassNotFoundException "+e.getMessage());
         }
+
+
+
 //            boolean eof = false;
 //            while (!eof) {
 //                try {
@@ -110,6 +112,9 @@ public class Locations implements Map<Integer, Location> {
 //        } catch (IOException e) {
 //            e.printStackTrace();
 //        }
+
+
+
     }
 
     @Override
