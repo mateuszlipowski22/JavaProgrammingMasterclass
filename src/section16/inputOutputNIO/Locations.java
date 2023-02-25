@@ -17,7 +17,7 @@ public class Locations implements Map<Integer, Location> {
         Path dirPath = FileSystems.getDefault().getPath("directions_big.txt");
 
         try (BufferedWriter locFile = Files.newBufferedWriter(locPath);
-             BufferedWriter dirFile = Files.newBufferedWriter(dirPath);) {
+             BufferedWriter dirFile = Files.newBufferedWriter(dirPath)) {
 
             for (Location location : locations.values()) {
                 locFile.write(location.getLocationID() + "," + location.getDescription() + "\n");
