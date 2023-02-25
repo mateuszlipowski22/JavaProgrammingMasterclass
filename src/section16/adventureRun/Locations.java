@@ -7,6 +7,7 @@ public class Locations implements Map<Integer, Location> {
 
     private static Map<Integer, Location> locations = new LinkedHashMap<>();
     private static Map<Integer, IndexRecord> index = new LinkedHashMap<>();
+    private static RandomAccessFile ra;
 
     public static void main(String[] args) throws IOException {
 
@@ -39,6 +40,13 @@ public class Locations implements Map<Integer, Location> {
 
                 startPointer=(int) rao.getFilePointer();
             }
+
+            rao.seek(indexStart);
+            for(Integer locationID : index.keySet()){
+                rao.writeInt(locationID);
+                rao.writeInt(index.get(locationID).getStartByte());
+                rao.writeInt(index.get(locationID).getLength());
+            }
         }
 
 //        try (DataOutputStream locFile = new DataOutputStream(new BufferedOutputStream(new FileOutputStream( "location.dat")))) {
@@ -63,25 +71,46 @@ public class Locations implements Map<Integer, Location> {
     }
 
     static {
-        try (ObjectInputStream locFile = new ObjectInputStream(new BufferedInputStream(new FileInputStream("locations2.dat")))) {
-            boolean eof = false;
-            while (!eof) {
-                try {
-                    Location location = (Location) locFile.readObject();
-                    System.out.println("Read location " + location.getLocationID() + " : " + location.getDescription());
-                    System.out.println("Found " + location.getExits().size() + " exits");
-                    locations.put(location.getLocationID(), location);
-                } catch (EOFException ef) {
-                    eof = true;
-                }
+
+        try{
+            ra=new RandomAccessFile("locations_rand.dat","rwd");
+            int numLocations = ra.readInt();
+            long locationStarterPoint = ra.readInt();
+
+            while (ra.getFilePointer()<locationStarterPoint){
+                int locationID= ra.readInt();
+                int locationStart=ra.readInt();
+                int locationLength= ra.readInt();
+
+                IndexRecord record = new IndexRecord(locationStart,locationLength);
+                index.put(locationID, record);
             }
-        } catch (InvalidClassException i){
-            System.out.println("InvalidClassException "+i.getMessage());
-        }catch (IOException io) {
-            System.out.println("IO exception "+io.getMessage());
-        }catch (ClassNotFoundException e) {
-            System.out.println("ClassNotFoundException "+e.getMessage());
+
+
+        }catch (IOException e){
+            System.out.println("IOException in static initiazer: "+e.getMessage());
         }
+
+
+//        try (ObjectInputStream locFile = new ObjectInputStream(new BufferedInputStream(new FileInputStream("locations2.dat")))) {
+//            boolean eof = false;
+//            while (!eof) {
+//                try {
+//                    Location location = (Location) locFile.readObject();
+//                    System.out.println("Read location " + location.getLocationID() + " : " + location.getDescription());
+//                    System.out.println("Found " + location.getExits().size() + " exits");
+//                    locations.put(location.getLocationID(), location);
+//                } catch (EOFException ef) {
+//                    eof = true;
+//                }
+//            }
+//        } catch (InvalidClassException i){
+//            System.out.println("InvalidClassException "+i.getMessage());
+//        }catch (IOException io) {
+//            System.out.println("IO exception "+io.getMessage());
+//        }catch (ClassNotFoundException e) {
+//            System.out.println("ClassNotFoundException "+e.getMessage());
+//        }
 
 
 
