@@ -2,6 +2,7 @@ package section16.javaNIO;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.charset.StandardCharsets;
@@ -14,15 +15,40 @@ public class Main {
             FileChannel binChannel = binFile.getChannel()) {
 
             ByteBuffer buffer = ByteBuffer.allocate(100);
+
+//            byte[] outputByte = "Hello World".getBytes(StandardCharsets.UTF_8);
+//            byte[] outputByte2 = "Nice to meet you".getBytes(StandardCharsets.UTF_8);
+//            buffer.put(outputByte).putInt(1).putInt(212).put(outputByte2).putInt(2122132);
+//            buffer.flip();
+
             byte[] outputByte = "Hello World".getBytes(StandardCharsets.UTF_8);
             buffer.put(outputByte);
+            long int1Pos = outputByte.length;
             buffer.putInt(1);
+            long int2Pos = int1Pos+Integer.BYTES;
             buffer.putInt(212);
             byte[] outputByte2 = "Nice to meet you".getBytes(StandardCharsets.UTF_8);
             buffer.put(outputByte2);
+            long int3Pos = int2Pos+Integer.BYTES+outputByte2.length;
             buffer.putInt(2122132);
             buffer.flip();
+
             binChannel.write(buffer);
+
+            RandomAccessFile ra = new RandomAccessFile("data.dat","rwd");
+            FileChannel channel = ra.getChannel();
+            ByteBuffer readChannel = ByteBuffer.allocate(100);
+            channel.read(readChannel);
+            readChannel.flip();
+            byte[] inputString = new byte[outputByte.length];
+            readChannel.get(inputString);
+            System.out.println("inputString ="+new String(inputString));
+            System.out.println("int1 = "+readChannel.getInt());
+            System.out.println("int2 = "+readChannel.getInt());
+            byte[] inputString2 = new byte[outputByte2.length];
+            readChannel.get(inputString2);
+            System.out.println("inputString2 ="+new String(inputString2));
+            System.out.println("int3 = "+readChannel.getInt());
 
 
 
