@@ -69,6 +69,36 @@ public class Main {
         }catch (IOException e){
             System.out.println(e.getMessage());
         }
+
+        File file = new File("/Example/file.txt");
+        Path convertedPath = file.toPath();
+        System.out.println("ConvertedPath = "+convertedPath);
+
+        File parent = new File("/Example");
+        File resolvedFile = new File(parent, "dir/file.txt");
+        System.out.println(resolvedFile.toPath());
+
+        resolvedFile = new File("/Example", "dir/file.txt");
+        System.out.println(resolvedFile.toPath());
+
+        Path parentPath = Paths.get("/Example");
+        Path childRelativePath = Paths.get("dir/file.txt");
+        System.out.println(parentPath.resolve(childRelativePath));
+
+        File workingDirectory = new File("").getAbsoluteFile();
+        System.out.println("Working directory =" + workingDirectory);
+
+        System.out.println("---print Dir2 contents using list() method");
+        File dir2File = new File(workingDirectory, "/Example/Dir2");
+        String[] dir2Content = dir2File.list();
+        for (int i = 0; i < dir2Content.length; i++) {
+            System.out.println("i="+i+" : "+dir2Content[i]);
+        }
+        System.out.println("---print Dir2 contents using listFiles() method");
+        File[] dir2Files = dir2File.listFiles();
+        for (int i = 0; i < dir2Files.length; i++) {
+            System.out.println("i="+i+" : "+dir2Files[i].getName());
+        }
     }
 
 }
