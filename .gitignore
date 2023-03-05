@@ -11,3 +11,8 @@
 /files/SubDirectoryFile.txt
 /WorkingDirectoryFile.txt
 /Example/file2.txt
+/Example/Dir4/Dir2Copy/Dir3/file1.txt
+/Example/Dir4/Dir2Copy/file1.txt
+/Example/Dir4/Dir2Copy/Dir3/file2.txt
+/Example/Dir4/Dir2Copy/file2.txt
+/Example/Dir4/Dir2Copy/file3.dat

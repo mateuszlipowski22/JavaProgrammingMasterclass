@@ -1,4 +1,4 @@
-package section16.src;
+package section16.directories;
 
 import java.io.File;
 import java.io.IOException;
@@ -59,6 +59,14 @@ public class Main {
         try {
             Files.walkFileTree(dir2Path, new PrintNames());
         } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+
+        System.out.println("---Copy Dir2 to Dir4/Dir2Copy---");
+        Path copyPath = FileSystems.getDefault().getPath("Example"+File.separator+"Dir4"+File.separator+"Dir2Copy");
+        try{
+            Files.walkFileTree(dir2Path, new CopyFiles(dir2Path, copyPath));
+        }catch (IOException e){
             System.out.println(e.getMessage());
         }
     }

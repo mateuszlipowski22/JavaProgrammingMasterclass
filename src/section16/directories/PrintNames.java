@@ -1,4 +1,4 @@
-package section16.src;
+package section16.directories;
 
 import java.io.IOException;
 import java.nio.file.FileVisitResult;
