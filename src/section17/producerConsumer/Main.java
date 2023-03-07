@@ -15,7 +15,7 @@ public class Main {
         ReentrantLock bufferLock = new ReentrantLock();
         MyConsumer consumer1 = new MyConsumer(buffer, ThreadColor.ANSI_BLUE, bufferLock);
         MyProducer producer = new MyProducer(buffer, ThreadColor.ANSI_PURPLE, bufferLock);
-        MyConsumer consumer2 = new MyConsumer(buffer, ThreadColor.ANSI_CYAN, bufferLock);
+        MyConsumer consumer2 = new MyConsumer(buffer, ThreadColor.ANSI_RED, bufferLock);
 
         new Thread(producer).start();
         new Thread(consumer1).start();
@@ -48,8 +48,11 @@ class MyProducer implements Runnable {
             try {
                 System.out.println(color + "Adding..." + num);
                 bufferLock.lock();
-                buffer.add(num);
-                bufferLock.unlock();
+                try {
+                    buffer.add(num);
+                } finally {
+                    bufferLock.unlock();
+                }
                 Thread.sleep(random.nextInt(1000));
             } catch (InterruptedException e) {
                 System.out.println("Producer was interrupted");
@@ -58,8 +61,11 @@ class MyProducer implements Runnable {
 
         System.out.println(color + "Adding EOF and exiting....");
         bufferLock.lock();
+        try {
             buffer.add(EOF);
-        bufferLock.unlock();
+        } finally {
+            bufferLock.unlock();
+        }
     }
 }
 
@@ -77,21 +83,28 @@ class MyConsumer implements Runnable {
     @Override
     public void run() {
 
-        while (true) {
-            bufferLock.lock();
-            if (buffer.isEmpty()) {
-                bufferLock.unlock();
-                continue;
-            }
-            if (buffer.get(0).equals(EOF)) {
-                System.out.println(color + "Exiting");
-                bufferLock.unlock();
-                break;
-            } else {
-                System.out.println(color + "Removed " + buffer.remove(0));
-            }
-            bufferLock.unlock();
-        }
+        int counter = 0;
 
+        while (true) {
+            if(bufferLock.tryLock()){
+                try{
+                    if (buffer.isEmpty()) {
+                        continue;
+                    }
+                    System.out.println(color+"Counter = "+counter);
+                    counter=0;
+                    if (buffer.get(0).equals(EOF)) {
+                        System.out.println(color + "Exiting");
+                        break;
+                    } else {
+                        System.out.println(color + "Removed " + buffer.remove(0));
+                    }
+                }finally {
+                    bufferLock.unlock();
+                }
+            }else {
+                counter++;
+            }
+        }
     }
 }
