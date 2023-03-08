@@ -1,8 +1,10 @@
 package section17.starvation;
 
+import java.util.concurrent.locks.ReentrantLock;
+
 public class Main {
 
-    private static Object lock = new Object();
+    private static ReentrantLock lock = new ReentrantLock(true);
 
     public static void main(String[] args) {
         Thread t1 = new Thread(new Worker(ThreadColor.ANSI_BLUE),"Priority 10");
@@ -36,8 +38,11 @@ public class Main {
         @Override
         public void run() {
             for (int i = 1; i < 100; i++) {
-                synchronized (lock){
+                lock.lock();
+                try {
                     System.out.format(threadColor+"%s: runCount = %d\n", Thread.currentThread().getName(),runCounter++);
+                } finally {
+                    lock.unlock();
                 }
             }
         }
