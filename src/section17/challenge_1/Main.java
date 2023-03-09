@@ -38,15 +38,19 @@ public class Main {
             }
         });
 
+
+
         Thread thead2 = new Thread(new Runnable() {
             @Override
             public void run() {
-                bankAccount.deposit(203.75);
-                System.out.println(bankAccount.getAccountNumber() + " : " + bankAccount.getBalance());
-                bankAccount.withdraw(100);
-                System.out.println(bankAccount.getAccountNumber() + " : " + bankAccount.getBalance());
+
             }
-        });
+        }){
+            @Override
+            public void run() {
+
+            }
+        };
 
         thead1.start();
         thead2.start();
