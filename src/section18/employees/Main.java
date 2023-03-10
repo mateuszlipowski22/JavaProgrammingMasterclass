@@ -2,7 +2,10 @@ package section18.employees;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+import java.util.function.IntPredicate;
 import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 public class Main {
 
@@ -39,6 +42,28 @@ public class Main {
 
         printEmployeeByAge(employees, "Employees over 30", employee -> employee.getAge()>30);
         printEmployeeByAge(employees, "Employees 30 and younger", employee -> employee.getAge()<=30);
+        printEmployeeByAge(employees, "Employees younger than 25", new Predicate<Employee>() {
+            @Override
+            public boolean test(Employee employee) {
+                return employee.getAge()<25;
+            }
+        });
+
+        IntPredicate greaterThanFifteen = i -> i>15;
+        IntPredicate lowerThanOneHundred = i -> i<100;
+
+        System.out.println(greaterThanFifteen.test(10));
+        int a = 20;
+        System.out.println(greaterThanFifteen.test(a + 10));
+
+        System.out.println(greaterThanFifteen.and(lowerThanOneHundred).test(a));
+        System.out.println(greaterThanFifteen.and(lowerThanOneHundred).test(15));
+
+        Random random = new Random();
+        Supplier<Integer> randomSupplier = ()->random.nextInt(1000);
+        for(int i=0;i<10;i++){
+            System.out.println(randomSupplier.get());
+        }
 
     }
 
@@ -52,5 +77,6 @@ public class Main {
                 System.out.println(employee.getName());
             }
         }
+        System.out.println();
     }
 }
