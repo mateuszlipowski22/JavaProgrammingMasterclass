@@ -26,6 +26,25 @@ public class Main {
         employees.add(tim);
         employees.add(snow);
 
+        employees.forEach(employee -> {
+            System.out.println(employee.getName());
+            System.out.println(employee.getAge());
+        });
+
+//        for (Employee employee : employees) {
+//            System.out.println(employee.getName());
+//            System.out.println(employee.getAge());
+//        }
+
+//        System.out.println("************");
+//
+//        for (int i=0; i< employees.size();i++){
+//            Employee employee = employees.get(i);
+//            System.out.println(employee.getName());
+//            new Thread(()-> System.out.println(employee.getAge())).start();
+//        }
+
+
 //        Collections.sort(employees, new Comparator<Employee>(){
 //            @Override
 //            public int compare(Employee employee1, Employee employee2) {
@@ -107,9 +126,10 @@ class AnotherClass {
 //        };
 
         int i = 0;
-        UpperConcat upperConcat = (s1,s2)->{
-            System.out.println("Lambda class name is "+ getClass().getSimpleName());
-            return s1.toUpperCase()+s2.toUpperCase();
+        UpperConcat upperConcat = (s1, s2) -> {
+            System.out.println("Lambda class name is " + getClass().getSimpleName());
+            System.out.println("i in the lambda = " + i);
+            return s1.toUpperCase() + s2.toUpperCase();
         };
 
 //        UpperConcat upperConcat = new UpperConcat() {
@@ -134,5 +154,20 @@ class AnotherClass {
 //                return s1.toUpperCase()+s2.toUpperCase();
 //            }
 //        },"String1","String2");
+    }
+
+    public void printValue() {
+        int number = 25;
+
+        Runnable r = () -> {
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException ex) {
+                ex.printStackTrace();
+            }
+            System.out.println("The value is" + number);
+        };
+
+        new Thread(r).start();
     }
 }
