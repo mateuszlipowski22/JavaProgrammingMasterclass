@@ -3,6 +3,7 @@ package section18.streams;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class Main {
 
@@ -39,6 +40,33 @@ public class Main {
                 .sorted()
                 .forEach(s-> System.out.println(s));
 
+        Stream<String> ioNumberStream = Stream.of("I26", "I17", "I29", "O07");
+        Stream<String> inNumberStream = Stream.of("N26", "N17", "N29", "O07","I26", "I17", "I29");
+        Stream<String> concatStream = Stream.concat(ioNumberStream,inNumberStream);
+        System.out.println("----------------------");
+        System.out.println(concatStream
+                .distinct()
+                .peek(System.out::println)
+                .count());
+
+
+//        Random random = new Random();
+//        Map<Integer,Integer> result = new HashMap<>();
+//
+//        int iteration = 1000;
+//        int number;
+//        for (int i=0; i<iteration; i++){
+//            number = random.nextInt(10)+1;
+//            if(!result.containsKey(number)){
+//                result.put(number, 1);
+//            }else {
+//                result.put(number,result.get(number)+1);
+//            }
+//        }
+//
+//        for (Map.Entry<Integer, Integer> entry : result.entrySet()) {
+//            System.out.println(entry.getKey() + ":" + entry.getValue());
+//        }
     }
 
 }
