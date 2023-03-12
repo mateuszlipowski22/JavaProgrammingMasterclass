@@ -3,6 +3,8 @@ package section18.streams;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Main {
@@ -50,6 +52,8 @@ public class Main {
                 .count());
 
 
+
+
 //        Random random = new Random();
 //        Map<Integer,Integer> result = new HashMap<>();
 //
@@ -67,6 +71,74 @@ public class Main {
 //        for (Map.Entry<Integer, Integer> entry : result.entrySet()) {
 //            System.out.println(entry.getKey() + ":" + entry.getValue());
 //        }
+
+        Employee john = new Employee("John Thomson", 30);
+        Employee tim = new Employee("Tim Novak", 21);
+        Employee jack = new Employee("Jack Hammer", 40);
+        Employee snow = new Employee("Snow White", 33);
+        Employee red = new Employee("Red Pill", 40);
+        Employee charming = new Employee("Prince Charming", 33);
+
+        Department hr = new Department("HR");
+        hr.addEmployee(jack);
+        hr.addEmployee(john);
+        hr.addEmployee(tim);
+        Department accounting = new Department("Accounting");
+        accounting.addEmployee(snow);
+        accounting.addEmployee(red);
+        accounting.addEmployee(charming);
+
+        List<Department> departments = new ArrayList<>();
+        departments.add(hr);
+        departments.add(accounting);
+
+        departments.stream()
+                .flatMap(department -> department.getEmployees().stream())
+                .forEach(System.out::println);
+
+//        List<String> sortedGNumbers = someBingoNumbers
+//                .stream()
+//                .map(String::toUpperCase)
+//                .filter(s->s.startsWith("G"))
+//                .sorted()
+//                .collect(Collectors.toList());
+
+        List<String> sortedGNumbers = someBingoNumbers
+                .stream()
+                .map(String::toUpperCase)
+                .filter(s->s.startsWith("G"))
+                .sorted()
+                .collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
+
+        for (String s:sortedGNumbers){
+            System.out.println(s);
+        }
+
+        Map<Integer, List<Employee>> gropuByAge = departments
+                .stream()
+                .flatMap(department -> department.getEmployees().stream())
+                .collect(Collectors.groupingBy(employee -> employee.getAge()));
+
+
+        for (Map.Entry<Integer, List<Employee>> list : gropuByAge.entrySet()) {
+            System.out.println("Age : "+list.getKey());
+            for (Employee employee : list.getValue()) {
+                System.out.println(employee.getName());
+            }
+            System.out.println("-----------");
+        }
+
+        departments
+                .stream()
+                .flatMap(department -> department.getEmployees().stream())
+                .reduce((e1,e2)->e1.getAge()< e2.getAge() ? e1 : e2)
+                .ifPresent(System.out::println);
+
+        Stream.of("ABC","AC","BAA","CCCC","XY","ST")
+                .filter(s -> {
+                    System.out.println(s);
+                    return s.length()==3;
+                }).count();
     }
 
 }
