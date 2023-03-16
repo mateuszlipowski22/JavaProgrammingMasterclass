@@ -4,7 +4,7 @@ public class Utilities {
 
     public char[] everyNthChar(char[] sourceArray, int n) {
 
-        if (sourceArray == null || sourceArray.length == 0) {
+        if (sourceArray == null || sourceArray.length < n) {
             return sourceArray;
         }
 
