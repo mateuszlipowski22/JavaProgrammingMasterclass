@@ -9,14 +9,14 @@ public class UtilitiesTest {
     public Utilities utilities;
 
     @Before
-    public void setup(){
+    public void setup() {
         utilities = new Utilities();
     }
 
     @org.junit.Test
     public void everyNthChar() {
-        assertArrayEquals(new char[]{'e', 'l'}, utilities.everyNthChar(new char[]{'h','e','l','l','o'},2));
-        assertArrayEquals(new char[]{'h','e','l','l','o'}, utilities.everyNthChar(new char[]{'h','e','l','l','o'},6));
+        assertArrayEquals(new char[]{'e', 'l'}, utilities.everyNthChar(new char[]{'h', 'e', 'l', 'l', 'o'}, 2));
+        assertArrayEquals(new char[]{'h', 'e', 'l', 'l', 'o'}, utilities.everyNthChar(new char[]{'h', 'e', 'l', 'l', 'o'}, 6));
 
     }
 
@@ -31,7 +31,13 @@ public class UtilitiesTest {
 
     @org.junit.Test
     public void converter() {
-        assertEquals(300, utilities.converter(10,5));
+        assertEquals(300, utilities.converter(10, 5));
+        assertEquals(300, utilities.converter(10, 5));
+    }
+
+    @org.junit.Test(expected = ArithmeticException.class)
+    public void converter_arithmeticException() throws Exception {
+        utilities.converter(10, 0);
     }
 
     @org.junit.Test
