@@ -15,7 +15,7 @@ public class Main {
             return;
         }
 
-        List<Artist> artists = datasource.queryArtists(2);
+        List<Artist> artists = datasource.queryArtists(Datasource.ORDER_BY_DESC);
 
         if(artists == null){
             System.out.println("No artist!");
@@ -24,6 +24,11 @@ public class Main {
 
         for (Artist artist : artists){
             System.out.printf("ID = %5d | name = %35s \n",artist.getId(), artist.getName());
+        }
+
+        List<String> albumsForArtist = datasource.queryAlbumsForArtists("Iron Maiden", Datasource.ORDER_BY_DESC);
+        for (String album : albumsForArtist){
+            System.out.printf("name = %35s \n",album);
         }
 
         datasource.close();
