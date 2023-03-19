@@ -15,7 +15,7 @@ public class Main {
             return;
         }
 
-        List<Artist> artists = datasource.queryArtists();
+        List<Artist> artists = datasource.queryArtists(2);
 
         if(artists == null){
             System.out.println("No artist!");
