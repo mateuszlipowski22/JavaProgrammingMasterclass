@@ -26,7 +26,7 @@ public class Main {
             System.out.printf("ID = %5d | name = %35s \n",artist.getId(), artist.getName());
         }
 
-        List<String> albumsForArtist = datasource.queryAlbumsForArtists("Iron Maiden", Datasource.ORDER_BY_DESC);
+        List<String> albumsForArtist = datasource.queryAlbumsForArtists("Pink Floyd", Datasource.ORDER_BY_DESC);
         for (String album : albumsForArtist){
             System.out.printf("name = %35s \n",album);
         }
