@@ -2,6 +2,7 @@ package section22.database.music;
 
 import section22.database.music.model.Artist;
 import section22.database.music.model.Datasource;
+import section22.database.music.model.SongArtist;
 
 import java.util.List;
 
@@ -30,7 +31,17 @@ public class Main {
         for (String album : albumsForArtist){
             System.out.printf("name = %35s \n",album);
         }
+        List<SongArtist> songArtists = datasource.queryArtistsForSongs("She's On Fire", Datasource.ORDER_BY_DESC);
+        if(songArtists==null){
+            System.out.println("Couldnt find the artist for the song");
+            return;
+        }
 
+        for (SongArtist songArtist : songArtists){
+            System.out.printf("artist name = %35s, album name = %35s, track %d \n",songArtist.getArtistName(),songArtist.getAlbumName(),songArtist.getTrack());
+        }
+
+        datasource.querySongsMetadata();
         datasource.close();
 
     }
