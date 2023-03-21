@@ -361,7 +361,7 @@ public class Datasource {
         }
     }
 
-    private int insertSong(String title, String artist, String album, int track) {
+    public void insertSong(String title, String artist, String album, int track) {
 
         try {
             connection.setAutoCommit(false);
@@ -376,9 +376,8 @@ public class Datasource {
             } else {
                 throw new SQLException("The song insert failed");
             }
-            return 1;
         } catch (
-                SQLException e) {
+                Exception e) {
             System.out.println("Insert song exception: " + e.getMessage());
             try {
                 System.out.println("Performing rollback");
@@ -394,6 +393,5 @@ public class Datasource {
                 System.out.println("Couldnt reset auto-commit: " + e.getMessage());
             }
         }
-
     }
 }

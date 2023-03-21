@@ -5,7 +5,6 @@ import section22.database.music.model.Datasource;
 import section22.database.music.model.SongArtist;
 
 import java.util.List;
-import java.util.Scanner;
 
 public class Main {
 
@@ -49,17 +48,19 @@ public class Main {
 
         datasource.createViewForSongArtists();
 
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter a song name");
-        String title = scanner.nextLine();
-        songArtists=datasource.querySongInfoView(title);
-        if (songArtists.isEmpty()){
-            System.out.println("Couldn't find the artist for the song");
-            return;
-        }
-        for (SongArtist songArtist : songArtists){
-            System.out.printf("artist name = %35s, album name = %35s, track = %d \n",songArtist.getArtistName(),songArtist.getAlbumName(),songArtist.getTrack());
-        }
+//        Scanner scanner = new Scanner(System.in);
+//        System.out.println("Enter a song name");
+//        String title = scanner.nextLine();
+//        songArtists=datasource.querySongInfoView(title);
+//        if (songArtists.isEmpty()){
+//            System.out.println("Couldn't find the artist for the song");
+//            return;
+//        }
+//        for (SongArtist songArtist : songArtists){
+//            System.out.printf("artist name = %35s, album name = %35s, track = %d \n",songArtist.getArtistName(),songArtist.getAlbumName(),songArtist.getTrack());
+//        }
+
+        datasource.insertSong("Bird Dog", "Everly Brothers", "All-Time Greatest Hits", 7);
 
         datasource.close();
 
