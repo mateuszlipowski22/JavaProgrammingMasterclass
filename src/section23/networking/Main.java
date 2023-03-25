@@ -11,7 +11,7 @@ public class Main {
 
     public static void main(String[] args) {
         try {
-            URL url = new URL("http://example.org");
+            URL url = new URL("https://api.flickr.com/search/?text=cats");
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setRequestMethod("GET");
             urlConnection.setRequestProperty("User-Agent", "Chrome");
@@ -22,6 +22,7 @@ public class Main {
 
             if(responseCode!=200){
                 System.out.println("Error reading web page");
+                System.out.println(urlConnection.getResponseMessage());
                 return;
             }
 
