@@ -51,6 +51,6 @@ abstract class Line implements Mappable{
     }
 
     private String locations(){
-        return Arrays.toString(locations);
+        return Arrays.deepToString(locations);
     }
 }
