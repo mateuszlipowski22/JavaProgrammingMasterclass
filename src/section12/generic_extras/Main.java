@@ -1,7 +1,17 @@
 package section12.generic_extras;
 
+import section12.generic_extras.util.QueryItem;
+import section12.generic_extras.util.QueryList;
+
 import java.util.ArrayList;
 import java.util.List;
+
+record Employee(String name) implements QueryItem{
+    @Override
+    public boolean matchFieldValue(String fieldName, String value) {
+        return false;
+    }
+}
 
 public class Main {
 
@@ -25,6 +35,15 @@ public class Main {
 
         testList(new ArrayList<String>(List.of("Mati", "Seba")));
         testList(new ArrayList<Integer>(List.of(1,2,4,5,6)));
+
+        var queryList = new QueryList<>(plaStudents);
+        var matches = queryList.getMatches("course", "python");
+        printMoreLists(matches);
+
+        var students2021 = QueryList.getMatches(students, "yearstarted", "2021");
+        printMoreLists(students2021);
+
+//        QueryList<Employee> employeeList = new QueryList<>();
 
     }
 
