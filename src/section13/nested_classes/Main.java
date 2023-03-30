@@ -43,6 +43,48 @@ public class Main {
 
         storeEmployees.forEach(System.out::println);
 
+        System.out.println("With pig letter names:");
+        addPigLatinName(storeEmployees);
+
     }
 
+    public static void addPigLatinName(List<? extends StoreEmployee> list){
+
+        String lastName = "Piggy";
+
+        class DecorateEmployee extends StoreEmployee implements Comparable<DecorateEmployee>{
+
+            private String pigLatinName;
+            private Employee originalInstance;
+
+            public DecorateEmployee(String pigLatinName, Employee originalInstance) {
+                this.pigLatinName = pigLatinName+" "+lastName;
+                this.originalInstance = originalInstance;
+            }
+
+            @Override
+            public String toString(){
+                return originalInstance + " "+ pigLatinName;
+            }
+
+            @Override
+            public int compareTo(DecorateEmployee o) {
+                return pigLatinName.compareTo(o.pigLatinName);
+            }
+        }
+
+        List<DecorateEmployee> newList = new ArrayList<>(list.size());
+
+        for(var employee : list){
+            String name = employee.getName();
+            String pigLatin = name.substring(1)+name.charAt(0)+"ay";
+            newList.add(new DecorateEmployee(pigLatin, employee));
+        }
+
+        newList.sort(null);
+        for(var dEmployee : newList){
+            System.out.println(dEmployee.originalInstance+" "+dEmployee.pigLatinName);
+        }
+
+    }
 }
