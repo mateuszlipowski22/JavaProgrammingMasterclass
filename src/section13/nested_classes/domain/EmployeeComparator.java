@@ -1,4 +1,4 @@
-package section13.nested_classes;
+package section13.nested_classes.domain;
 
 import java.util.Comparator;
 

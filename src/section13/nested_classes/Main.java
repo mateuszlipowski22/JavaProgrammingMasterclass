@@ -1,5 +1,8 @@
 package section13.nested_classes;
 
+import section13.nested_classes.domain.Employee;
+import section13.nested_classes.domain.StoreEmployee;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +25,23 @@ public class Main {
 
         employees.forEach(System.out::println);
 
+
+        System.out.println("Store Members");
+
+        List<StoreEmployee> storeEmployees = new ArrayList<>(List.of(
+                new StoreEmployee(10515, "Meg",2019, "Target"),
+                new StoreEmployee(10015, "Joe",2021, "Walmart"),
+                new StoreEmployee(10115, "Tom",2020, "Macys"),
+                new StoreEmployee(10014, "Marty",2019, "Walmart"),
+                new StoreEmployee(10224, "Bud",2016, "Target")));
+
+//        var genericEmployee = new StoreEmployee();
+//        var comparator = genericEmployee.new StoreComparator<>();
+        var comparator = new StoreEmployee().new StoreComparator<>();
+//        var comparator = new Employee.EmployeeComparator<>();
+        storeEmployees.sort(comparator);
+
+        storeEmployees.forEach(System.out::println);
 
     }
 
