@@ -2,6 +2,7 @@ package section14.lambda_expression;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class Main {
 
@@ -26,6 +27,18 @@ public class Main {
             System.out.println();
         });
 
+        int result = calculator((a,b)->a+b, 2, 5);
+        Double result2 = calculator((a,b)->a/b, 10.0, 2.5);
+        String result3 = calculator(
+                (a,b)->a.toUpperCase(Locale.ROOT) +" "+ b.toUpperCase(), "Dolph", "Lundgren");
+
+    }
+
+    public static <T> T calculator(Operation<T> function, T value1, T value2){
+
+        T result = function.operate(value1, value2);
+        System.out.println("Result of operation: "+result);
+        return result;
     }
 
 }
