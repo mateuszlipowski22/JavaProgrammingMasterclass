@@ -1,8 +1,11 @@
 package section14.lambda_expression;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
+import java.util.function.BiConsumer;
+import java.util.function.BinaryOperator;
 
 public class Main {
 
@@ -32,13 +35,44 @@ public class Main {
         String result3 = calculator(
                 (a,b)->a.toUpperCase(Locale.ROOT) +" "+ b.toUpperCase(), "Dolph", "Lundgren");
 
+        var coords = new ArrayList<>(List.of(
+                new double[]{47.2160, -95.2348},
+                new double[]{29.1566, -89.2495},
+                new double[]{35.1556, -90.0659}));
+
+        coords.forEach(s-> System.out.println(Arrays.toString(s)));
+
+        BiConsumer<Double,Double> p1 = (lat, lng)->
+                System.out.printf("[lat:%.3f lon:%.3f]%n", lat, lng);
+
+        var firstPoint = coords.get(0);
+        processPoint(firstPoint[0], firstPoint[1], p1);
+
+        System.out.println("--------------");
+
+        coords.forEach(s->processPoint(s[0], s[1], p1));
+        coords.forEach(s->processPoint(s[0], s[1], (lat, lng)->
+                System.out.printf("[lat:%.3f lon:%.3f]%n", lat, lng)));
+
+        list.removeIf(s->s.equalsIgnoreCase("bravo"));
+        list.forEach(System.out::println);
+
+        list.addAll(List.of("easy", "echo", "earnest"));
+        list.forEach(System.out::println);
+        System.out.println("------");
+        list.removeIf(s->s.startsWith("ea"));
+        list.forEach(System.out::println);
+
     }
 
-    public static <T> T calculator(Operation<T> function, T value1, T value2){
+    public static <T> T calculator(BinaryOperator<T> function, T value1, T value2){
 
-        T result = function.operate(value1, value2);
+        T result = function.apply(value1, value2);
         System.out.println("Result of operation: "+result);
         return result;
     }
 
+    public static <T> void processPoint(T t1, T t2, BiConsumer<T,T> consumer){
+        consumer.accept(t1,t2);
+    }
 }
