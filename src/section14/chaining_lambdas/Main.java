@@ -1,7 +1,6 @@
 package section14.chaining_lambdas;
 
-import java.util.Arrays;
-import java.util.Locale;
+import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -14,7 +13,7 @@ public class Main {
         Function<String, String> uCase = String::toUpperCase;
         System.out.println(uCase.apply(name));
 
-        Function<String, String> lastName = s->s.concat(" Nowak");
+        Function<String, String> lastName = s -> s.concat(" Nowak");
         Function<String, String> uCaseLastName = uCase.andThen(lastName);
         System.out.println(uCaseLastName.apply(name));
 
@@ -22,32 +21,32 @@ public class Main {
         System.out.println(uCaseLastName.apply(name));
 
         Function<String, String[]> f0 = uCase.
-                andThen(s->s.concat(" Buchalka"))
-                .andThen(s->s.split(" "));
+                andThen(s -> s.concat(" Buchalka"))
+                .andThen(s -> s.split(" "));
         System.out.println(Arrays.toString(f0.apply(name)));
 
         Function<String, String> f1 = uCase.
-                andThen(s->s.concat(" Buchalka"))
-                .andThen(s->s.split(" "))
-                .andThen(s->s[1].toUpperCase(Locale.ROOT) + ", " + s[0]);
+                andThen(s -> s.concat(" Buchalka"))
+                .andThen(s -> s.split(" "))
+                .andThen(s -> s[1].toUpperCase(Locale.ROOT) + ", " + s[0]);
         System.out.println(f1.apply(name));
 
         Function<String, Integer> f2 = uCase.
-                andThen(s->s.concat(" Buchalka"))
-                .andThen(s->s.split(" "))
-                .andThen(s->String.join(", ",s))
-        .andThen(String::length);
+                andThen(s -> s.concat(" Buchalka"))
+                .andThen(s -> s.split(" "))
+                .andThen(s -> String.join(", ", s))
+                .andThen(String::length);
         System.out.println(f2.apply(name));
 
-        String[] names={"Anna", "Bob", "Carp;"};
-        Consumer<String> s0 = s->System.out.print(s.charAt(0));
+        String[] names = {"Anna", "Bob", "Carp;"};
+        Consumer<String> s0 = s -> System.out.print(s.charAt(0));
         Consumer<String> s1 = System.out::println;
-        Arrays.asList(names).forEach(s0.andThen(s-> System.out.println("-----")).andThen(s1));
+        Arrays.asList(names).forEach(s0.andThen(s -> System.out.println("-----")).andThen(s1));
 
-        Predicate<String> p1 = s->s.equals("TIM");
-        Predicate<String> p2 = s->s.equalsIgnoreCase("Tim");
-        Predicate<String> p3 = s->s.startsWith("T");
-        Predicate<String> p4 = s->s.endsWith("e");
+        Predicate<String> p1 = s -> s.equals("TIM");
+        Predicate<String> p2 = s -> s.equalsIgnoreCase("Tim");
+        Predicate<String> p3 = s -> s.startsWith("T");
+        Predicate<String> p4 = s -> s.endsWith("e");
 
         Predicate<String> combined1 = p1.or(p2);
         System.out.println("combined1 = " + combined1.test(name));
@@ -58,7 +57,32 @@ public class Main {
         Predicate<String> combined3 = p3.or(p4).negate();
         System.out.println("combined3 = " + combined3.test(name));
 
+        record Person(String firstName, String lastName) {
+        }
 
+        List<Person> list = new ArrayList<>(Arrays.asList(
+                new Person("Peter", "Pan"),
+                new Person("Peter", "PumpkinEater"),
+                new Person("Mickey", "Mouse"),
+                new Person("Minnie", "Mouse")
+                ));
+
+        list.sort(((o1, o2) -> o1.lastName.compareTo(o2.lastName)));
+        list.forEach(System.out::println);
+
+        System.out.println("---------------------");
+        list.sort(Comparator.comparing(Person::lastName));
+        list.forEach(System.out::println);
+
+        System.out.println("---------------------");
+        list.sort(Comparator.comparing(Person::lastName)
+                .thenComparing(Person::firstName));
+        list.forEach(System.out::println);
+
+        System.out.println("---------------------");
+        list.sort(Comparator.comparing(Person::lastName)
+                .thenComparing(Person::firstName).reversed());
+        list.forEach(System.out::println);
     }
 
 }
