@@ -14,6 +14,10 @@ public class BankAccount {
 
     }
 
+    public BankAccount(String customerName, String customerEmail, String customerPhoneNumber) {
+        this("111111",0, customerEmail, customerEmail, customerPhoneNumber);
+    }
+
     public BankAccount(String number, double balance, String customerName, String customerEmail, String customerPhoneNumber) {
         this.number = number;
         this.balance = balance;
