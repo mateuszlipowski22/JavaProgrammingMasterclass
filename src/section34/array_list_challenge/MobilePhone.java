@@ -66,10 +66,18 @@ public class MobilePhone {
         return null;
     }
 
+    public Contact queryContact(String name){
+        int position = findContact(name);
+        if(position>=0){
+            return myContacts.get(position);
+        }
+        return null;
+    }
+
     public void printContacts() {
         System.out.println("Contact list: \n");
         for (int i=0; i<myContacts.size();i++){
-            System.out.printf("\t %d : %s : %s \n", i+1, myContacts.get(i).getName(), myContacts.get(i).getPhoneNumber());
+            System.out.printf("\t %d. %s : %s \n", i+1, myContacts.get(i).getName(), myContacts.get(i).getPhoneNumber());
         }
 //        myContacts.forEach((contact) -> {
 //            System.out.println(contact.getName()+" : "+contact.getPhoneNumber());

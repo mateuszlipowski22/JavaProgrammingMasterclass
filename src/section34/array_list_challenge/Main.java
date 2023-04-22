@@ -27,13 +27,13 @@ public class Main {
                     addNewContact();
                     break;
                 case 3:
-//                    updateContact();
+                    updateContact();
                     break;
                 case 4:
-//                    removeContact();
+                    removeContact();
                     break;
                 case 5:
-//                    queryContact();
+                    queryContact();
                     break;
                 case 6:
                     printActions();
@@ -62,6 +62,57 @@ public class Main {
         }else {
             System.out.println("Cannot add : "+newContact.getName() + " already on file");
         }
+    }
+
+    private static void updateContact(){
+        System.out.println("Enter existing contact name: ");
+        String name = scanner.nextLine();
+
+        Contact existingContact = mobilePhone.queryContact(name);
+        if(existingContact==null){
+            System.out.println("Contact not found");
+            return;
+        }
+        System.out.println("Enter new contact name: ");
+        String newName = scanner.nextLine();
+        System.out.println("Enter new contact phone number: ");
+        String newPhoneNumber = scanner.nextLine();
+        Contact contact = Contact.createContact(newName,newPhoneNumber);
+        if(mobilePhone.updateContact(existingContact, contact)){
+            System.out.println("Successfully updated record");
+        }else {
+            System.out.println("Error updating record");
+        };
+    }
+
+    private static void removeContact(){
+        System.out.println("Enter existing contact name: ");
+        String name = scanner.nextLine();
+
+        Contact existingContact = mobilePhone.queryContact(name);
+        if(existingContact==null){
+            System.out.println("Contact not found");
+            return;
+        }
+
+        if(mobilePhone.removeContact(existingContact)){
+            System.out.println("Successfully deleted record");
+        }else {
+            System.out.println("Error deleting record");
+        };
+    }
+
+    private static void queryContact(){
+        System.out.println("Enter existing contact name: ");
+        String name = scanner.nextLine();
+
+        Contact existingContact = mobilePhone.queryContact(name);
+        if(existingContact==null){
+            System.out.println("Contact not found");
+            return;
+        }
+
+        System.out.println("Name: "+existingContact.getName() + " phone number is "+existingContact.getPhoneNumber());
     }
 
     private static void printActions() {
