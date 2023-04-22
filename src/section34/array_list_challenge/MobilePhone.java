@@ -36,6 +36,17 @@ public class MobilePhone {
         return this.myContacts.indexOf(contact);
     }
 
+    public boolean removeContact(Contact contact){
+        int foundPosition = findContact(contact);
+        if(foundPosition<0){
+            System.out.println(contact.getName()+", was not found.");
+            return false;
+        }
+        this.myContacts.remove(foundPosition);
+        System.out.println(contact.getName()+", was removed");
+        return true;
+    }
+
     private int findContact(String contactName) {
         Contact contactToFind = myContacts
                 .stream()
@@ -46,5 +57,22 @@ public class MobilePhone {
         }else {
             return -1;
         }
+    }
+
+    public String queryContact(Contact contact){
+        if (findContact(contact)>=0){
+            return contact.getName();
+        }
+        return null;
+    }
+
+    public void printContacts() {
+        System.out.println("Contact list: \n");
+        for (int i=0; i<myContacts.size();i++){
+            System.out.printf("\t %d : %s : %s \n", i+1, myContacts.get(i).getName(), myContacts.get(i).getPhoneNumber());
+        }
+//        myContacts.forEach((contact) -> {
+//            System.out.println(contact.getName()+" : "+contact.getPhoneNumber());
+//        });
     }
 }
