@@ -120,7 +120,7 @@ public class Main {
         System.out.println("\t 0 - to shutdown.");
         System.out.println("\t 1 - to print contacts.");
         System.out.println("\t 2 - to add new contact.");
-        System.out.println("\t 3 - to update existing contact.");
+        System.out.println("\t 3 - to update an existing contact.");
         System.out.println("\t 4 - to remove an existing contact.");
         System.out.println("\t 5 - query if an existing contact exists.");
         System.out.println("\t 5 - to print a list of available actions.");
